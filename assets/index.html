@@ -1,12 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-slate-300">
   <head>
     <title>RM 500 commander</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/main.css">
     <script src="/main.js" defer ></script>
   </head>
-  <body>
-    <h1 class="font-bold">Control</h1>
+  <body class="bg-slate-300">
+    <div class="w-full flex flex-col items-center">
+      <div class="font-bold p-2 text-2xl text-center w-full
+        text-gray-100 bg-slate-800">
+        RM500 Commander
+      </div>
+      <div class="max-w-md flex flex-col w-full p-4 mt-8">
+        <div class="grid grid-cols-2 gap-8">
+          <button class="py-2 px-4 font-bold text-center
+            disabled:bg-slate-200 bg-slate-400 text-xl
+            cursor-pointer" id="tab1-btn" disabled>
+            Monitor
+          </button>
+          <button class="py-2 px-4 font-bold text-center
+            disabled:bg-slate-200 bg-slate-400 text-xl
+            cursor-pointer" id="tab2-btn">
+            Configure
+          </button>
+        </div>
+        <div class="grid grid-cols-2 p-4 bg-slate-200 gap-x-2 gap-y-8  text-lg" id="tab1">
+          <div class="font-bold">Status:</div><div data-field="status">-</div>
+          <div class="font-bold">Signal:</div><div data-field="signal">-</div>
+          <div class="font-bold">SIM Status:</div><div data-field="sim">-</div>
+        </div>
+        <form class="hidden" id="tab2">
+          <div class="grid grid-cols-2 p-4 bg-slate-200 gap-x-2 gap-y-8 
+            text-lg items-center">
+            <div class="font-bold">SIM1 PIN:</div>
+            <input type="text" inputmode="numeric" pattern="[0-9]*"
+              name="pin1"
+              class="border border-slate-700 p-2">
+            <div class="font-bold">SIM2 PIN:</div>
+            <input type="text" inputmode="numeric" pattern="[0-9]*"
+              name="pin2"
+              class="border border-slate-700 p-2">
+            <div class="font-bold">SIM Mode:</div>
+            <div class="grid grid-cols-3 gap-x-2 gap-y-3">
+              <input type="radio" id="sim_mode_1" name="sim_mode" value="auto"
+              class="w-6 h-6 checked:bg-blue-500"/>
+              <label for="sim_mode_1" class="font-bold col-span-2">Auto</label>
+
+              <input type="radio" id="sim_mode_2" name="sim_mode" value="sim1"
+              class="w-6 h-6 checked:bg-blue-500"/>
+              <label for="sim_mode_2" class="font-bold col-span-2">SIM 1</label>
+
+              <input type="radio" id="sim_mode_3" name="sim_mode" value="sim2"
+              class="w-6 h-6 checked:bg-blue-500"/>
+              <label for="sim_mode_3" class="font-bold col-span-2">SIM 2</label>
+
+
+            </div>
+            <div></div>
+            <button class="py-2 px-4 font-bold text-white bg-blue-500 relative"
+              type="submit">
+              Save
+              <div class="absolute bg-green-600 inset-0 font-bold text-right
+                flex justify-center items-center hidden" id="saveok">
+                Save ok !
+              </div>
+              <div class="absolute bg-red-600 inset-0 font-bold text-right
+                flex justify-center items-center hidden" id="saveerr">
+                ! ERROR !
+              </div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
 
