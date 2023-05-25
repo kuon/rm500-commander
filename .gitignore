@@ -1,0 +1,7 @@
+node_modules
+zig-out
+zig-cache
+src/main.css
+src/main.js
+src/index.html
+
