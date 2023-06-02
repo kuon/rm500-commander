@@ -2,22 +2,23 @@ PATH := ./node_modules/.bin:$(PATH)
 
 .PHONY: build
 
-build:
+build: assets
 	zig build
 
-.PHONY: build
+.PHONY: build-pi
 
 build-pi:
 	zig build -Dtarget=arm-linux-musl -Doptimize=ReleaseFast
 
 .PHONY: run
 
-run: assets build
+run: build
 	./zig-out/bin/rm500
 
 .PHONY: clean
 
 clean:
+	rm -fr run.sh
 	rm -fr zig-out
 	rm -fr zig-cache
 	rm -fr src/main.css
@@ -44,3 +45,6 @@ js: node_modules
 node_modules: package.json 
 	npm install
 
+watch:
+	fswatch --event=Updated --event=AttributeModified -o -0 -r assets src/main.zig \
+		| xargs -0 -n1 bash -c "./run.sh"
