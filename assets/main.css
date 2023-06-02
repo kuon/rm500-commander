@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.checkbox, .fld, .radio {
+  @apply border border-slate-700 border-2 appearance-none bg-white;
+  @apply focus:ring-green-600 focus:ring-4 focus:outline-none;
+}
+
+.fld {
+  @apply p-2;
+}
+
+.checkbox {
+  @apply checked:bg-blue-600 relative;
+  @apply p-2 w-8 h-8;
+}
+
+.checkbox:checked::after {
+  content: '';
+  @apply inset-1 absolute flex justify-center items-center text-xl text-white;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'> <path d='M 0,0 L 10,10 M 0,10 L 10,0' stroke='white' stroke-width='1.5' /> </svg>");
+}
+
+.radio {
+  @apply w-8 h-8 checked:bg-blue-600;
+  @apply rounded-full relative;
+}
+
+.radio:checked::after {
+  content: '';
+  @apply inset-0 absolute flex justify-center items-center text-xl text-white;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'> <circle cy='5' cx='5' r='3' stroke='white' stroke-width='1.5' fill='transparent' /> </svg>");
+}
+

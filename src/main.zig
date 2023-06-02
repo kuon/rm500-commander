@@ -74,6 +74,8 @@ fn serve_request(server: *std.http.Server) !void {
             break :data data_css;
         } else if (mem.eql(u8, path, "/main.js")) {
             break :data data_js;
+        } else if (mem.eql(u8, path, "/config")) {
+            break :data data_error;
         } else {
             break :data data_error;
         }

@@ -1,17 +1,50 @@
-function save(evt) {
+async function save(evt) {
   evt.preventDefault()
   console.log(evt.target)
-  const form_data = new FormData(evt.target)
-  const json = Object.fromEntries(form_data)
+  const fset = evt.target.querySelector("fieldset")
+  fset.disabled = true
 
-
-  console.log(json)
   var flash = null
-  // flash = document.getElementById("saveerr")
-  flash = document.getElementById("saveok")
+
+  try {
+    const form_data = new FormData(evt.target)
+    const json = Object.fromEntries(form_data)
+    try {
+      document.activeElement.blur()
+    } catch (e) {
+      console.error(e)
+    }
+
+    const res = await fetch('/config', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(json)
+    })
+    const json_res = await res.json()
+    console.log(json_res)
+
+    console.log(json)
+    flash = document.getElementById("saveok")
+    setTimeout(() => {
+      flash.classList.add("hidden")
+    }, 2500)
+    fset.disabled = false
+  } catch (e) {
+    flash = document.getElementById("saveerr")
+    flash.innerHTML = `<div>ERROR: ${e.message}</div><div class="mt-4 text-sm">Click to hide</div>`
+    const rm = () => {
+      flash.removeEventListener("click", rm)
+      flash.classList.add("hidden")
+      fset.disabled = false
+    }
+    flash.addEventListener("click", rm)
+  }
 
   flash.classList.remove("hidden")
-  setTimeout(() => flash.classList.add("hidden"), 1500)
+
 }
 
 function sw(tab) {

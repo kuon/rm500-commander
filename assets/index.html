@@ -7,7 +7,7 @@
     <script src="/main.js" defer ></script>
   </head>
   <body class="bg-slate-300">
-    <div class="w-full flex flex-col items-center">
+    <div class="w-full flex flex-col items-center select-none">
       <div class="font-bold p-2 text-2xl text-center w-full
         text-gray-100 bg-slate-800">
         RM500 Commander
@@ -16,12 +16,12 @@
         <div class="grid grid-cols-2 gap-8">
           <button class="py-2 px-4 font-bold text-center
             disabled:bg-slate-200 bg-slate-400 text-xl
-            cursor-pointer" id="tab1-btn" disabled>
+            " id="tab1-btn" disabled>
             Monitor
           </button>
           <button class="py-2 px-4 font-bold text-center
             disabled:bg-slate-200 bg-slate-400 text-xl
-            cursor-pointer" id="tab2-btn">
+            " id="tab2-btn">
             Configure
           </button>
         </div>
@@ -31,45 +31,71 @@
           <div class="font-bold">SIM Status:</div><div data-field="sim">-</div>
         </div>
         <form class="hidden" id="tab2">
-          <div class="grid grid-cols-2 p-4 bg-slate-200 gap-x-2 gap-y-8 
-            text-lg items-center">
-            <div class="font-bold">SIM1 PIN:</div>
+          <div class="bg-slate-200 text-lg relative">
+          <fieldset class="disabled:opacity-50 grid grid-cols-2 items-center p-4  gap-x-2 gap-y-8" >
+
+            <div class="font-bold">SIM 1 PIN:</div>
             <input type="text" inputmode="numeric" pattern="[0-9]*"
               name="pin1"
-              class="border border-slate-700 p-2">
-            <div class="font-bold">SIM2 PIN:</div>
+              class="fld">
+
+            <div class="font-bold">Use SIM 1:</div>
+            <div class="flex items-center">
+              <input type="checkbox"
+                id="use_sim1"
+                name="use_sim1"
+                class="checkbox">
+              <label for="use_sim1" class="ml-4 font-bold col-span-2">Use SIM 1</label>
+            </div>
+
+            <div class="font-bold">SIM 2 PIN:</div>
             <input type="text" inputmode="numeric" pattern="[0-9]*"
               name="pin2"
-              class="border border-slate-700 p-2">
+              class="fld">
+
+            <div class="font-bold">Use SIM 2:</div>
+            <div class="flex items-center">
+              <input type="checkbox"
+                id="use_sim2"
+                name="use_sim2"
+                class="checkbox">
+              <label for="use_sim2" class="ml-4 font-bold col-span-2">Use SIM 2</label>
+            </div>
+
             <div class="font-bold">SIM Mode:</div>
             <div class="grid grid-cols-3 gap-x-2 gap-y-3">
               <input type="radio" id="sim_mode_1" name="sim_mode" value="auto"
-              class="w-6 h-6 checked:bg-blue-500"/>
+              class="radio"/>
               <label for="sim_mode_1" class="font-bold col-span-2">Auto</label>
 
               <input type="radio" id="sim_mode_2" name="sim_mode" value="sim1"
-              class="w-6 h-6 checked:bg-blue-500"/>
+              class="radio"/>
               <label for="sim_mode_2" class="font-bold col-span-2">SIM 1</label>
 
               <input type="radio" id="sim_mode_3" name="sim_mode" value="sim2"
-              class="w-6 h-6 checked:bg-blue-500"/>
+              class="radio"/>
               <label for="sim_mode_3" class="font-bold col-span-2">SIM 2</label>
 
 
             </div>
             <div></div>
-            <button class="py-2 px-4 font-bold text-white bg-blue-500 relative"
+            <button class="py-2 px-4 font-bold text-white bg-blue-600 relative
+                focus:ring-green-600 focus:ring-4 focus:outline-none
+                appearance-none"
               type="submit">
               Save
-              <div class="absolute bg-green-600 inset-0 font-bold text-right
-                flex justify-center items-center hidden" id="saveok">
-                Save ok !
-              </div>
-              <div class="absolute bg-red-600 inset-0 font-bold text-right
-                flex justify-center items-center hidden" id="saveerr">
-                ! ERROR !
-              </div>
             </button>
+          </fieldset>
+          <div class="absolute bg-green-600 bottom-4 right-4 left-4
+              p-2 h-16 font-bold text-white text-center
+              flex justify-center items-center hidden" id="saveok">
+            Save ok !
+          </div>
+          <div class="absolute bg-red-600 top-4 bottom-4 right-4 left-4
+              p-2 font-bold text-white flex-col
+              flex justify-center items-center hidden text-center" id="saveerr">
+            ! ERROR !
+          </div>
           </div>
         </form>
       </div>
